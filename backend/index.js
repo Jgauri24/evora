@@ -12,9 +12,10 @@ const prisma = new PrismaClient();
 app.use(cors({
   origin: [
     "http://localhost:5173",  // Local development
-    "https://evora-jgauri24s-projects.vercel.app", // Deployed frontend
-    "https://evora-git-main-jgauri24s-projects.vercel.app",
-    "https://evora-5qdhd1prz-jgauri24s-projects.vercel.app"
+    "https://evora-nine.vercel.app/",
+    "https://evora-git-main-jgauri24s-projects.vercel.app/",
+"https://evora-nine.vercel.app/",
+"https://evora-vx66.onrender.com"
   ],
   methods: ['GET','POST','PUT','DELETE','OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
