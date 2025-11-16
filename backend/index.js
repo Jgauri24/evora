@@ -16,6 +16,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://evora-nine.vercel.app",
+      "https://evora-vx66.onrender.com",
       "https://evora-git-main-jgauri24s-projects.vercel.app",
     ],
     credentials: true,
