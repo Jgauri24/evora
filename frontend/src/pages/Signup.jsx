@@ -19,7 +19,9 @@ const Signup = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post("https://evora-vx66.onrender.com/api/auth/signup", form);
+      const res = await axios.post("http://localhost:4000/api/auth/signup", form);
+
+      // const res = await axios.post("https://evora-vx66.onrender.com/api/auth/signup", form);
       localStorage.setItem("token", res.data.token);
       navigate("/login");
     } catch (err) {
@@ -91,12 +93,12 @@ const Signup = () => {
           </div>
 
           <button
-  type="submit"
-  disabled={loading}
-  className="w-full bg-black text-white font-semibold py-3 px-4 rounded-lg hover:bg-white hover:text-black border border-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition"
->
-  {loading ? "Creating account..." : "Sign Up"}
-</button>
+            type="submit"
+            disabled={loading}
+            className="w-full bg-black text-white font-semibold py-3 px-4 rounded-lg hover:bg-white hover:text-black border border-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition"
+          >
+            {loading ? "Creating account..." : "Sign Up"}
+          </button>
 
 
         </form>

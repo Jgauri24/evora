@@ -13,17 +13,19 @@ const prisma = new PrismaClient();
 
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5174",
-      "https://evora-nine.vercel.app",
-      "https://evora-vx66.onrender.com",
-      "https://evora-git-main-jgauri24s-projects.vercel.app",
-    ],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:5174",
+//       "https://evora-nine.vercel.app",
+//       "https://evora-vx66.onrender.com",
+//       "https://evora-git-main-jgauri24s-projects.vercel.app",
+//     ],
+//     credentials: true,
+//   })
+// );
+
+app.use(cors());
 
 function generateToken(user) {
   return jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
