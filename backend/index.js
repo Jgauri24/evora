@@ -1,6 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -14,7 +16,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
+      "http://localhost:5174",
       "https://evora-nine.vercel.app",
       "https://evora-vx66.onrender.com",
       "https://evora-git-main-jgauri24s-projects.vercel.app",
