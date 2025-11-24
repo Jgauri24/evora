@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
- "scripts": {
+  "scripts": {
     "backend:install": "cd backend && npm install",
     "backend:dev": "cd backend && npm run dev",
     "backend:start": "cd backend && npm start",
@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/Jgauri24/evora/issues"
   },
-  "homepage": "https://github.com/Jgauri24/evora#readme"
+  "homepage": "https://github.com/Jgauri24/evora#readme",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "recharts": "^3.5.0"
+  }
 }
