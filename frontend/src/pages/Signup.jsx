@@ -1,6 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import {signupAPI }from "../services/api"; // ⬅️ USE YOUR AXIOS INSTANCE
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -18,14 +18,16 @@ const Signup = () => {
     }
 
     setLoading(true);
+
     try {
-      // const res = await axios.post("http://localhost:4000/api/auth/signup", form);
-      const res = await axios.post("https://evora-vx66.onrender.com/api/auth/signup", form);
+      const res = await signupAPI.post("/auth/signup", form);
       localStorage.setItem("token", res.data.token);
+
       navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");
     }
+
     setLoading(false);
   };
 
@@ -45,11 +47,10 @@ const Signup = () => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-800 mb-2">
+            <label className="block text-sm font-medium text-gray-800 mb-2">
               Name
             </label>
             <input
-              id="name"
               type="text"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -60,11 +61,10 @@ const Signup = () => {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-800 mb-2">
+            <label className="block text-sm font-medium text-gray-800 mb-2">
               Email
             </label>
             <input
-              id="email"
               type="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -75,11 +75,10 @@ const Signup = () => {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-800 mb-2">
+            <label className="block text-sm font-medium text-gray-800 mb-2">
               Password
             </label>
             <input
-              id="password"
               type="password"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
@@ -88,18 +87,18 @@ const Signup = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
               placeholder="••••••••"
             />
-            <p className="mt-1 text-xs text-gray-500">Must be at least 6 characters</p>
+            <p className="mt-1 text-xs text-gray-500">
+              Must be at least 6 characters
+            </p>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black text-white font-semibold py-3 px-4 rounded-lg hover:bg-white hover:text-black border border-black focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition"
+            className="w-full bg-black text-white font-semibold py-3 px-4 rounded-lg hover:bg-white hover:text-black border border-black transition"
           >
             {loading ? "Creating account..." : "Sign Up"}
           </button>
-
-
         </form>
 
         <p className="mt-6 text-center text-sm text-gray-600">

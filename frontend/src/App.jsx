@@ -2,9 +2,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAuth } from "./contexts/AuthContext";
+import UserDashboard from "./pages/UserDashboard";
+import SelectRole from "./pages/SelectRole";
 
 function App() {
   const { token } = useAuth();
@@ -14,26 +15,35 @@ function App() {
       <Navbar />
 
       <Routes>
-        {/* Redirect logged-in users to dashboard */}
+        {/* If logged in → go to dashboard */}
         <Route
           path="/"
-          element={!token ? <Signup /> : <Navigate to="/login" replace />}
+          element={!token ? <Signup /> : <Navigate to="/dashboard" replace />}
         />
 
         <Route
           path="/login"
-          element={!token ? <Login /> : <Navigate to="/dashboard" replace />}
+          element={!token ? <Login /> : <Navigate to="/select-role" replace />}
+        />
+
+        <Route
+          path="/select-role"
+          element={
+            <ProtectedRoute>
+              <SelectRole />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <Dashboard />
+<UserDashboard/>
             </ProtectedRoute>
           }
         />
-      </Routes>
+      </Routes> 
     </>
   );
 }
