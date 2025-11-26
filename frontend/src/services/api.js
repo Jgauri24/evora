@@ -18,7 +18,7 @@ API.interceptors.request.use((config) => {
 // Auth
 export const signupAPI = (data) => API.post("/auth/signup", data);
 export const loginAPI = (data) => API.post("/auth/login", data);
-export const setRole = (data) => API.post("/auth/set-role", data);
+
 
 // Dashboard
 export const fetchDashboard = () => API.get("/dashboard");

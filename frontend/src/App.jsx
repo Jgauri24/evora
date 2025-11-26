@@ -5,7 +5,7 @@ import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAuth } from "./contexts/AuthContext";
 import UserDashboard from "./pages/UserDashboard";
-import SelectRole from "./pages/SelectRole";
+
 
 function App() {
   const { token } = useAuth();
@@ -26,14 +26,7 @@ function App() {
           element={!token ? <Login /> : <Navigate to="/select-role" replace />}
         />
 
-        <Route
-          path="/select-role"
-          element={
-            <ProtectedRoute>
-              <SelectRole />
-            </ProtectedRoute>
-          }
-        />
+  
 
         <Route
           path="/dashboard"
