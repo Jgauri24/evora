@@ -30,5 +30,6 @@ export const fetchEvents = (params) => API.get('/events', { params });
 // Bookings
 export const bookEvent = (id) => API.post(`/events/${id}/book`);
 // export const cancelBooking = (id) => API.post(`/events/${id}/cancel`);
-
+// profile
+export const updateProfile = (data) => API.put('/profile', data);
 export default API;

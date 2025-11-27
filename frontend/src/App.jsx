@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useAuth } from "./contexts/AuthContext";
 import UserDashboard from "./pages/UserDashboard";
 import Events from "./pages/Events";
+import Profile from "./pages/Profile";
 
 function App() {
   const { token } = useAuth();
@@ -37,6 +38,13 @@ function App() {
           }
         />
       </Routes> 
+      <Route
+      path="/profile"
+      element={
+        <ProtectedRoute>
+        <Profile/>
+                    </ProtectedRoute>
+      }/>
     </>
   );
 }
