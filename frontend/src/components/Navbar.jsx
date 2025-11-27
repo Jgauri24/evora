@@ -1,56 +1,37 @@
-import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext.jsx';
 
-const Navbar = () => {
-  const { token, logout } = useAuth();
-
+export default function Navbar() {
+  const { token, setToken, setUser } = useAuth();
+  const navigate = useNavigate();
+  const logout = () => {
+    setToken(null);
+    setUser(null);
+    navigate('/');
+  };
   return (
-    <nav className="w-full bg-white shadow-md py-4 px-6 flex justify-between items-center">
-      {/* Left side: Brand/Tagline */}
-      <div>
-        <Link to="/" className="text-2xl font-bold text-gray-800 hover:text-cyan-600">
-          Life, Planned Better
-        </Link>
-      </div>
-
-      {/* Right side: Navigation */}
-      <div className="flex items-center gap-4">
-        {!token ? (
-          <>
-            <Link
-              to="/login"
-              className="text-gray-700 hover:text-cyan-600 font-medium"
-            >
-              Login
-            </Link>
-
-            <Link
-              to="/"
-              className="text-white bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-lg font-medium"
-            >
-              Signup
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link
-              to="/dashboard"
-              className="text-gray-700 hover:text-cyan-600 font-medium"
-            >
-              Dashboard
-            </Link>
-
-            <button
-              onClick={logout}
-              className="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg font-medium"
-            >
-              Logout
-            </button>
-          </>
-        )}
-      </div>
-    </nav>
+    <header className="bg-white/80 backdrop-blur sticky top-0 z-30 border-b">
+      <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
+        <Link to="/" className="text-xl font-semibold text-primary">EventSphere</Link>
+        <div className="flex items-center gap-4">
+          <Link to="/events" className="hover:text-primary">Events</Link>
+          {token && (
+            <>
+              <Link to="/dashboard" className="hover:text-primary">Dashboard</Link>
+              <Link to="/bookings" className="hover:text-primary">My Bookings</Link>
+              <Link to="/profile" className="hover:text-primary">Profile</Link>
+            </>
+          )}
+          {!token ? (
+            <>
+              <Link to="/login" className="px-4 py-2 rounded-2xl bg-primary text-white">Login</Link>
+              <Link to="/signup" className="px-4 py-2 rounded-2xl bg-accent text-white">Sign up</Link>
+            </>
+          ) : (
+            <button onClick={logout} className="px-4 py-2 rounded-2xl bg-gray-200 hover:bg-gray-300">Logout</button>
+          )}
+        </div>
+      </nav>
+    </header>
   );
-};
-
-export default Navbar;
+}

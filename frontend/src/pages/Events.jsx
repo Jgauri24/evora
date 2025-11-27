@@ -6,7 +6,7 @@ import EventList from '../components/EventList.jsx';
 import Pagination from '../components/Pagination.jsx';
 import BookingModal from '../components/BookingModal.jsx';
 import { bookEvent, fetchEvents } from '../services/api.js';
-import { useAuth } from '../context/AuthContext.jsx';
+import { useAuth } from '../contexts/AuthContext.jsx';
 
 function useQuery() {
   const { search } = useLocation();

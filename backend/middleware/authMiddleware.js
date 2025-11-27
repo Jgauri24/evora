@@ -13,3 +13,14 @@ export const authMiddleware = (req, res, next) => {
     return res.status(403).json({ message: "Forbidden" });
   }
 };
+export async function adminOnly(req, res, next) {
+  try {
+    if (!req.user?.id) return res.status(401).json({ message: 'Unauthorized' });
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } });
+    if (!user) return res.status(401).json({ message: 'Unauthorized' });
+    if (user.role !== 'admin') return res.status(403).json({ message: 'Forbidden' });
+    return next();
+  } catch (e) {
+    return next(e);
+  }
+}

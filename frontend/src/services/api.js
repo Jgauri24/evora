@@ -24,11 +24,11 @@ export const loginAPI = (data) => API.post("/auth/login", data);
 export const fetchDashboard = () => API.get("/dashboard");
 
 // Events
-export const getEvents = () => API.get("/events");
-export const getEventById = (id) => API.get(`/events/${id}`);
+export const fetchEvents = (params) => API.get('/events', { params });
+// export const getEventById = (id) => API.get(`/events/${id}`);
 
 // Bookings
 export const bookEvent = (id) => API.post(`/events/${id}/book`);
-export const cancelBooking = (id) => API.post(`/events/${id}/cancel`);
+// export const cancelBooking = (id) => API.post(`/events/${id}/cancel`);
 
 export default API;

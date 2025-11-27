@@ -5,7 +5,7 @@ import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAuth } from "./contexts/AuthContext";
 import UserDashboard from "./pages/UserDashboard";
-
+import Events from "./pages/Events";
 
 function App() {
   const { token } = useAuth();
@@ -25,7 +25,7 @@ function App() {
           path="/login"
           element={!token ? <Login /> : <Navigate to="/select-role" replace />}
         />
-
+<Route path="/events" element={<Events/>}/>
   
 
         <Route
