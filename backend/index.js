@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import eventsRoutes from "./routes/eventsRoutes.js"
 import bookingRoutes from "./routes/bookingsRoutes.js"
+import profileRoutes from "./routes/profileRoutes.js"
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -13,8 +14,8 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/events", eventsRoutes);
-app.use("api/booking",bookingRoutes)
-
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/profile", profileRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));

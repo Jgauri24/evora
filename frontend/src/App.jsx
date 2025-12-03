@@ -7,6 +7,8 @@ import { useAuth } from "./contexts/AuthContext";
 import UserDashboard from "./pages/UserDashboard";
 import Events from "./pages/Events";
 import Profile from "./pages/Profile";
+import MyBookings from "./pages/MyBookings";
+import EventDetails from "./pages/EventDetails";
 
 function App() {
   const { token } = useAuth();
@@ -27,7 +29,7 @@ function App() {
           element={!token ? <Login /> : <Navigate to="/select-role" replace />}
         />
 <Route path="/events" element={<Events/>}/>
-  
+<Route path="/events/:id" element={<EventDetails/>}/>
 
         <Route
           path="/dashboard"
@@ -37,7 +39,15 @@ function App() {
             </ProtectedRoute>
           }
         />
-      </Routes> 
+     
+     <Route
+          path="/bookings"
+          element={
+            <ProtectedRoute>
+<MyBookings/>
+            </ProtectedRoute>
+          }
+        />
       <Route
       path="/profile"
       element={
@@ -45,6 +55,7 @@ function App() {
         <Profile/>
                     </ProtectedRoute>
       }/>
+       </Routes> 
     </>
   );
 }

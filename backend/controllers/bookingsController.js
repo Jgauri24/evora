@@ -1,7 +1,8 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from "../prismaClient.js";
+
 export async function getMyBookings(req, res, next) {
   try {
+    console.log('Fetching bookings for user:', req.user.id);
     const bookings = await prisma.booking.findMany({
       where: { userId: req.user.id },
       orderBy: { createdAt: 'desc' },
@@ -9,6 +10,7 @@ export async function getMyBookings(req, res, next) {
     });
     return res.json(bookings);
   } catch (e) {
+    console.error('Error fetching bookings:', e);
     return next(e);
   }
 }

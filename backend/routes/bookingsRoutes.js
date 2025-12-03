@@ -4,7 +4,7 @@ import { getMyBookings, cancelBooking } from '../controllers/bookingsController.
 
 const router = Router();
 
-router.get('/user/bookings', authMiddleware, getMyBookings);
-router.delete('/bookings/:id', authMiddleware, cancelBooking);
+router.get('/', authMiddleware, getMyBookings);
+router.delete('/:id', authMiddleware, cancelBooking);
 
 export default router;
