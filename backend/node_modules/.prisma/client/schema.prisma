@@ -15,6 +15,12 @@ model User {
   createdAt DateTime  @default(now())
   avatar    String?
   role      String    @default("user")
+  bio       String?
+  instagram String?
+  linkedin  String?
+  location  String?
+  phone     String?
+  twitter   String?
   bookings  Booking[]
 }
 

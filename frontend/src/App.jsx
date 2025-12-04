@@ -23,39 +23,43 @@ function App() {
           path="/"
           element={!token ? <Signup /> : <Navigate to="/dashboard" replace />}
         />
+        <Route
+          path="/signup"
+          element={!token ? <Signup /> : <Navigate to="/login" replace />}
+        />
 
         <Route
           path="/login"
-          element={!token ? <Login /> : <Navigate to="/select-role" replace />}
+          element={!token ? <Login /> : <Navigate to="/dashboard" replace />}
         />
-<Route path="/events" element={<Events/>}/>
-<Route path="/events/:id" element={<EventDetails/>}/>
+        <Route path="/events" element={<Events />} />
+        <Route path="/events/:id" element={<EventDetails />} />
 
         <Route
           path="/dashboard"
           element={
             <ProtectedRoute>
-<UserDashboard/>
+              <UserDashboard />
             </ProtectedRoute>
           }
         />
-     
-     <Route
+
+        <Route
           path="/bookings"
           element={
             <ProtectedRoute>
-<MyBookings/>
+              <MyBookings />
             </ProtectedRoute>
           }
         />
-      <Route
-      path="/profile"
-      element={
-        <ProtectedRoute>
-        <Profile/>
-                    </ProtectedRoute>
-      }/>
-       </Routes> 
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } />
+      </Routes>
     </>
   );
 }

@@ -23,14 +23,32 @@ export async function cancelBooking(req, res, next) {
       return res.status(404).json({ message: 'Booking not found' });
 
     await prisma.$transaction([
-      prisma.booking.update({ where: { id }, data: { status: 'cancelled' } }),
+      prisma.booking.delete({ where: { id } }),
       prisma.event.update({
         where: { id: booking.eventId },
         data: { capacity: { increment: 1 } }
       })
     ]);
 
-    return res.status(200).json({ message: 'Cancelled' });
+    return res.status(200).json({ message: 'Booking deleted' });
+  } catch (e) {
+    return next(e);
+  }
+}
+
+export async function markAsAttended(req, res, next) {
+  try {
+    const id = Number(req.params.id);
+    const booking = await prisma.booking.findUnique({ where: { id } });
+    if (!booking || booking.userId !== req.user.id)
+      return res.status(404).json({ message: 'Booking not found' });
+
+    const updated = await prisma.booking.update({
+      where: { id },
+      data: { status: 'attended' }
+    });
+
+    return res.status(200).json(updated);
   } catch (e) {
     return next(e);
   }

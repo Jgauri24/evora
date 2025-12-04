@@ -9,7 +9,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { login } = useAuth(); 
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,11 +23,9 @@ const Login = () => {
       login(res.data.user, res.data.token);
 
       // Navigation based on role
-      if (res.data.user.role === "none") {
-        navigate("/select-role");
-      } else {
+ 
         navigate("/dashboard");
-      }
+      
 
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
@@ -37,41 +35,41 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-400 via-cyan-300 to-cyan-200 flex items-center justify-center px-4">
-      <div className="max-w-md w-full bg-white rounded-3xl shadow-xl p-8">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
+      <div className="max-w-md w-full bg-white rounded-xl shadow-lg border border-gray-200 p-8">
 
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Life, Planned Better</h1>
+          <h1 className="text-3xl font-bold text-black">Welcome Back</h1>
           <p className="text-gray-600 mt-2">Login to your account</p>
         </div>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-800 mb-2">Email</label>
+            <label className="block text-sm font-semibold text-black mb-2">Email</label>
             <input
               type="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500"
+              className="input-field"
               placeholder="your@email.com"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-800 mb-2">Password</label>
+            <label className="block text-sm font-semibold text-black mb-2">Password</label>
             <input
               type="password"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500"
+              className="input-field"
               placeholder="••••••••"
             />
           </div>
@@ -79,7 +77,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black text-white font-semibold py-3 rounded-lg hover:bg-white hover:text-black border border-black transition disabled:opacity-50"
+            className="btn-primary w-full"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
@@ -87,7 +85,7 @@ const Login = () => {
 
         <p className="mt-6 text-center text-sm text-gray-600">
           New user?{" "}
-          <Link to="/" className="text-cyan-600 hover:text-cyan-700 font-medium">
+          <Link to="/" className="text-black font-semibold hover:text-gray-700 transition-colors">
             Sign up
           </Link>
         </p>

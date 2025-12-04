@@ -28,8 +28,8 @@ export default function Dashboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (!data) return <p>Failed to load</p>;
+  if (loading) return <div className="container py-8"><p className="text-gray-600">Loading dashboard...</p></div>;
+  if (!data) return <div className="container py-8"><p className="text-red-600">Failed to load dashboard</p></div>;
 
   const categoryData = data.categoryBreakdown.map((d, i) => ({
     name: d.category,
@@ -40,16 +40,21 @@ export default function Dashboard() {
   const upcomingCount = data.upcomingBookings.length;
 
   return (
-    <div className="space-y-6">
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-3">
+    <div className="container mx-auto py-8 space-y-8 max-w-7xl">
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-black mb-2">Dashboard</h1>
+        <p className="text-gray-600">Your event analytics and statistics</p>
+      </div>
+
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-3">
         <StatsCard title="Attended" value={data.totalEventsAttended} />
         <StatsCard title="Upcoming" value={upcomingCount} />
         <StatsCard title="Categories" value={data.categoryBreakdown.length} />
       </div>
 
       <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
-        <div className="bg-white rounded-2xl shadow p-4">
-          <h3 className="font-semibold mb-2">Events by Category</h3>
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+          <h3 className="font-bold text-lg text-black mb-4">Events by Category</h3>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -64,8 +69,8 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow p-4">
-          <h3 className="font-semibold mb-2">Attended Events — Last 12 months</h3>
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+          <h3 className="font-bold text-lg text-black mb-4">Attended Events — Last 12 months</h3>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data.monthlyAttendance}>
@@ -80,8 +85,8 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl shadow p-4">
-        <h3 className="font-semibold mb-2">Upcoming vs Past</h3>
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h3 className="font-bold text-lg text-black mb-4">Upcoming vs Past</h3>
         <div className="h-60">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={[{ name: 'Events', upcoming: upcomingCount, past: data.totalEventsAttended }]}>

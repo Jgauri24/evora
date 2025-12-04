@@ -33,6 +33,10 @@ export const bookEvent = (id) => API.post(`/events/${id}/book`);
 // Bookings 
 export const fetchMyBookings=()=>API.get("/bookings")
 export const cancelBooking=(id)=>API.delete(`/bookings/${id}`)
-// profile
+export const markAsAttended=(id)=>API.patch(`/bookings/${id}/attend`)
+
+// Profile
+export const fetchProfile = () => API.get('/profile');
 export const updateProfile = (data) => API.put('/profile', data);
+
 export default API;

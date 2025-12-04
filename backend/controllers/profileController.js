@@ -3,7 +3,7 @@ import prisma  from '../prismaClient.js';
 export async function updateProfile(req, res, next) {
   try {
     const userId = req.user.id;
-    const { name, avatar } = req.body;
+    const { name, avatar, bio, phone, location, instagram, twitter, linkedin } = req.body;
 
     const user = await prisma.user.findUnique({ where: { id: userId } });
     if (!user) return res.status(404).json({ message: 'User not found' });
@@ -12,9 +12,19 @@ export async function updateProfile(req, res, next) {
       where: { id: userId },
       data: { 
         ...(name && { name }),
-        ...(avatar && { avatar })
+        ...(avatar && { avatar }),
+        ...(bio && { bio }),
+        ...(phone && { phone }),
+        ...(location && { location }),
+        ...(instagram && { instagram }),
+        ...(twitter && { twitter }),
+        ...(linkedin && { linkedin })
       },
-      select: { id: true, name: true, email: true, avatar: true, role: true }
+      select: { 
+        id: true, name: true, email: true, avatar: true, role: true, 
+        bio: true, phone: true, location: true,
+        instagram: true, twitter: true, linkedin: true
+      }
     });
     
     return res.json(updatedUser);

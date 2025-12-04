@@ -110,6 +110,19 @@ export async function bookEvent(req, res, next) {
   const userId = req.user.id;
   try {
     const result = await prisma.$transaction(async (tx) => {
+      // Check if user already booked this event
+      const existingBooking = await tx.booking.findFirst({
+        where: { 
+          userId, 
+          eventId,
+          status: { in: ['booked', 'attended'] }
+        }
+      });
+      
+      if (existingBooking) {
+        throw Object.assign(new Error('You have already booked this event'), { status: 400 });
+      }
+
       const event = await tx.event.findUnique({ where: { id: eventId } });
       if (!event) throw Object.assign(new Error('Event not found'), { status: 404 });
       if (event.capacity <= 0)

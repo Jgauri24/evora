@@ -8,50 +8,91 @@ export default function FiltersPanel({ initial, onApply, onClear }) {
   const update = (k, v) => setFilters((f) => ({ ...f, [k]: v }));
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4">
-      <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-lg">Filters</h3>
-        <button onClick={() => setOpen((o) => !o)} className="text-sm text-primary">{open ? 'Hide' : 'Show'}</button>
+    <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8 shadow-sm">
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="font-semibold text-xl text-black">Filters</h3>
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="text-sm font-medium text-gray-600 hover:text-black transition-colors"
+        >
+          {open ? 'Hide Filters' : 'Show Filters'}
+        </button>
       </div>
       {open && (
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <div>
-            <label className="block text-sm mb-1">Category</label>
-            <select className="w-full border rounded-2xl px-3 py-2" value={filters.category || ''} onChange={(e) => update('category', e.target.value || undefined)}>
-              <option value="">All</option>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="space-y-2">
+            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Category</label>
+            <select
+              className="input-field"
+              value={filters.category || ''}
+              onChange={(e) => update('category', e.target.value || undefined)}
+            >
+              <option value="">All Categories</option>
               <option>Workshop</option>
               <option>Concert</option>
               <option>Conference</option>
               <option>Meetup</option>
             </select>
           </div>
-          <div>
-            <label className="block text-sm mb-1">Mode</label>
-            <select className="w-full border rounded-2xl px-3 py-2" value={filters.mode || ''} onChange={(e) => update('mode', e.target.value || undefined)}>
-              <option value="">All</option>
+          <div className="space-y-2">
+            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Mode</label>
+            <select
+              className="input-field"
+              value={filters.mode || ''}
+              onChange={(e) => update('mode', e.target.value || undefined)}
+            >
+              <option value="">All Modes</option>
               <option value="online">Online</option>
               <option value="offline">Offline</option>
             </select>
           </div>
-          <div>
-            <label className="block text-sm mb-1">Date From</label>
-            <input type="date" className="w-full border rounded-2xl px-3 py-2" value={filters.dateFrom || ''} onChange={(e) => update('dateFrom', e.target.value || undefined)} />
+          <div className="space-y-2">
+            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Date From</label>
+            <input
+              type="date"
+              className="input-field"
+              value={filters.dateFrom || ''}
+              onChange={(e) => update('dateFrom', e.target.value || undefined)}
+            />
           </div>
-          <div>
-            <label className="block text-sm mb-1">Date To</label>
-            <input type="date" className="w-full border rounded-2xl px-3 py-2" value={filters.dateTo || ''} onChange={(e) => update('dateTo', e.target.value || undefined)} />
+          <div className="space-y-2">
+            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Date To</label>
+            <input
+              type="date"
+              className="input-field"
+              value={filters.dateTo || ''}
+              onChange={(e) => update('dateTo', e.target.value || undefined)}
+            />
           </div>
-          <div>
-            <label className="block text-sm mb-1">Min Price</label>
-            <input type="number" min="0" className="w-full border rounded-2xl px-3 py-2" value={filters.minPrice || ''} onChange={(e) => update('minPrice', e.target.value || undefined)} />
+          <div className="space-y-2">
+            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Min Price</label>
+            <input
+              type="number"
+              min="0"
+              placeholder="0"
+              className="input-field"
+              value={filters.minPrice || ''}
+              onChange={(e) => update('minPrice', e.target.value || undefined)}
+            />
           </div>
-          <div>
-            <label className="block text-sm mb-1">Max Price</label>
-            <input type="number" min="0" className="w-full border rounded-2xl px-3 py-2" value={filters.maxPrice || ''} onChange={(e) => update('maxPrice', e.target.value || undefined)} />
+          <div className="space-y-2">
+            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Max Price</label>
+            <input
+              type="number"
+              min="0"
+              placeholder="Any"
+              className="input-field"
+              value={filters.maxPrice || ''}
+              onChange={(e) => update('maxPrice', e.target.value || undefined)}
+            />
           </div>
-          <div>
-            <label className="block text-sm mb-1">Sort</label>
-            <select className="w-full border rounded-2xl px-3 py-2" value={filters.sort || ''} onChange={(e) => update('sort', e.target.value || undefined)}>
+          <div className="space-y-2">
+            <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Sort By</label>
+            <select
+              className="input-field"
+              value={filters.sort || ''}
+              onChange={(e) => update('sort', e.target.value || undefined)}
+            >
               <option value="">Newest</option>
               <option value="date">Date</option>
               <option value="popularity">Popularity</option>
@@ -60,9 +101,9 @@ export default function FiltersPanel({ initial, onApply, onClear }) {
           </div>
         </div>
       )}
-      <div className="mt-4 flex gap-3">
-        <button onClick={() => onApply?.(filters)} className="px-4 py-2 rounded-2xl bg-primary text-white">Apply</button>
-        <button onClick={() => onClear?.()} className="px-4 py-2 rounded-2xl bg-gray-100">Clear</button>
+      <div className="mt-6 flex gap-3 pt-6 border-t border-gray-200">
+        <button onClick={() => onApply?.(filters)} className="btn-primary">Apply Filters</button>
+        <button onClick={() => onClear?.()} className="btn-secondary">Clear All</button>
       </div>
     </div>
   );

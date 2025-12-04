@@ -2,36 +2,59 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
 
 export default function Navbar() {
-  const { token, setToken, setUser } = useAuth();
+  const { user, token, logout } = useAuth();
   const navigate = useNavigate();
-  const logout = () => {
-    setToken(null);
-    setUser(null);
-    navigate('/');
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
   };
+
   return (
-    <header className="bg-white/80 backdrop-blur sticky top-0 z-30 border-b">
-      <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to="/" className="text-xl font-semibold text-primary">EventSphere</Link>
-        <div className="flex items-center gap-4">
-          <Link to="/events" className="hover:text-primary">Events</Link>
-          {token && (
+    <nav className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <Link to="/" className="text-2xl font-bold text-black">
+          EventSphere
+        </Link>
+
+        <div className="flex items-center gap-6">
+          {token ? (
             <>
-              <Link to="/dashboard" className="hover:text-primary">Dashboard</Link>
-              <Link to="/bookings" className="hover:text-primary">My Bookings</Link>
-              <Link to="/profile" className="hover:text-primary">Profile</Link>
-            </>
-          )}
-          {!token ? (
-            <>
-              <Link to="/login" className="px-4 py-2 rounded-2xl bg-primary text-white">Login</Link>
-              <Link to="/signup" className="px-4 py-2 rounded-2xl bg-accent text-white">Sign up</Link>
+              <Link to="/events" className="text-gray-700 hover:text-black font-medium transition-colors">
+                Events
+              </Link>
+              <Link to="/dashboard" className="text-gray-700 hover:text-black font-medium transition-colors">
+                Dashboard
+              </Link>
+              <Link to="/bookings" className="text-gray-700 hover:text-black font-medium transition-colors">
+                My Bookings
+              </Link>
+              <Link
+                to="/profile"
+                className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-semibold hover:bg-gray-800 transition-colors"
+                title="Profile"
+              >
+                {user?.name?.charAt(0).toUpperCase() || 'U'}
+              </Link>
+              <button onClick={handleLogout} className="btn-secondary">
+                Logout
+              </button>
             </>
           ) : (
-            <button onClick={logout} className="px-4 py-2 rounded-2xl bg-gray-200 hover:bg-gray-300">Logout</button>
+            <>
+              <Link to="/events" className="text-gray-700 hover:text-black font-medium transition-colors">
+                Events
+              </Link>
+              <Link to="/login" className="btn-secondary">
+                Login
+              </Link>
+              <Link to="/signup" className="btn-primary">
+                Sign Up
+              </Link>
+            </>
           )}
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
 }
