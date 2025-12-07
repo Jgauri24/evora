@@ -32,85 +32,135 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-lg border border-gray-200 p-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-black">Join EventSphere</h1>
-          <p className="text-gray-600 mt-2">Create your account</p>
+    <div className="min-h-screen bg-white flex">
+      {/* Left Side - Image/Branding */}
+      <div className="hidden lg:flex lg:w-1/2 bg-black text-white items-center justify-center p-12">
+        <div className="max-w-md">
+          <h1 className="text-5xl font-extrabold mb-6 tracking-tight">Join Us.</h1>
+          <p className="text-xl text-gray-300 leading-relaxed">
+            Create your account and start your journey with the most premium event platform.
+          </p>
         </div>
+      </div>
 
-        {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-sm font-semibold text-black mb-2">
-              Name
-            </label>
-            <input
-              type="text"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              required
-              className="input-field"
-              placeholder="Your Name"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-black mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              required
-              className="input-field"
-              placeholder="your@email.com"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-black mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              required
-              minLength={6}
-              className="input-field"
-              placeholder="••••••••"
-            />
-            <p className="mt-1 text-xs text-gray-500">
-              Must be at least 6 characters
+      {/* Right Side - Signup Form */}
+      <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24 bg-white">
+        <div className="mx-auto w-full max-w-sm lg:w-96">
+          <div className="mb-10">
+            <h2 className="mt-6 text-3xl font-extrabold text-gray-900 tracking-tight">
+              Create Account
+            </h2>
+            <p className="mt-2 text-sm text-gray-600">
+              Enter your details below
             </p>
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="btn-primary w-full"
-          >
-            {loading ? "Creating account..." : "Sign Up"}
-          </button>
-        </form>
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            {error && (
+              <div className="bg-red-50 border-l-4 border-red-500 p-4">
+                <div className="flex">
+                  <div className="ml-3">
+                    <p className="text-sm text-red-700">{error}</p>
+                  </div>
+                </div>
+              </div>
+            )}
 
-        <p className="mt-6 text-center text-sm text-gray-600">
-          Already have an account?{" "}
-          <Link to="/login" className="text-black font-semibold hover:text-gray-700 transition-colors">
-            Sign in
-          </Link>
-        </p>
+            <div>
+              <label htmlFor="name" className="block text-sm font-bold text-gray-900 uppercase tracking-wide">
+                Full Name
+              </label>
+              <div className="mt-2">
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="input-field"
+                  placeholder="JOHN DOE"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-bold text-gray-900 uppercase tracking-wide">
+                Email
+              </label>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="input-field"
+                  placeholder="NAME@COMPANY.COM"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-bold text-gray-900 uppercase tracking-wide">
+                Password
+              </label>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  minLength={6}
+                  value={form.password}
+                  onChange={(e) => setForm({ ...form, password: e.target.value })}
+                  className="input-field"
+                  placeholder="••••••••"
+                />
+              </div>
+              <p className="mt-1 text-xs text-gray-500">
+                Must be at least 6 characters
+              </p>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn-primary"
+              >
+                {loading ? "CREATING..." : "SIGN UP"}
+              </button>
+            </div>
+          </form>
+
+          <div className="mt-8">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="bg-white px-2 text-gray-500 uppercase tracking-wider font-medium">Or</span>
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <Link
+                to="/login"
+                className="btn-secondary"
+              >
+                Sign In
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Signup;
+
 

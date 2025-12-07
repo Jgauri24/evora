@@ -12,7 +12,6 @@ import EventDetails from "./pages/EventDetails";
 
 function App() {
   const { token } = useAuth();
-
   return (
     <>
       <Navbar />

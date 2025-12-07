@@ -29,7 +29,6 @@ export default function MyBookings() {
   return (
     <div className="container mx-auto py-8 max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-black mb-2">My Bookings</h1>
         <p className="text-gray-600">Manage your event bookings</p>
       </div>
 
@@ -52,15 +51,15 @@ export default function MyBookings() {
                   </p>
                 </div>
                 <div className="flex gap-2">
-                  {isBooked && !isPast && (
-                    <button onClick={() => onCancel(b.id)} className="btn-secondary">
-                      Cancel
-                    </button>
-                  )}
-                  {isBooked && isPast && (
-                    <button onClick={() => onMarkAttended(b.id)} className="btn-primary">
-                      Mark as Attended
-                    </button>
+                  {isBooked && (
+                    <>
+                      <button onClick={() => onCancel(b.id)} className="btn-secondary">
+                        Cancel
+                      </button>
+                      <button onClick={() => onMarkAttended(b.id)} className="btn-primary">
+                        Mark as Attended
+                      </button>
+                    </>
                   )}
                   {isAttended && (
                     <span className="px-4 py-2 bg-green-50 text-green-700 border border-green-200 rounded-lg text-sm font-medium">

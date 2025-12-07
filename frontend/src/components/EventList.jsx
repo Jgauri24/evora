@@ -1,6 +1,6 @@
 import EventCard from './EventCard.jsx';
 
-export default function EventList({ events, onBook }) {
+export default function EventList({ events, onBook, onDelete }) {
   if (!events?.length) {
     return (
       <div className="text-center text-gray-600 py-12">
@@ -12,7 +12,7 @@ export default function EventList({ events, onBook }) {
   return (
     <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {events.map((e) => (
-        <EventCard key={e.id} event={e} onBook={onBook} />
+        <EventCard key={e.id} event={e} onBook={onBook} onDelete={onDelete} />
       ))}
     </div>
   );

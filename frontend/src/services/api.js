@@ -35,6 +35,10 @@ export const fetchMyBookings=()=>API.get("/bookings")
 export const cancelBooking=(id)=>API.delete(`/bookings/${id}`)
 export const markAsAttended=(id)=>API.patch(`/bookings/${id}/attend`)
 
+// Events Management (Admin)
+export const createEvent = (data) => API.post('/events', data);
+export const deleteEvent = (id) => API.delete(`/events/${id}`);
+
 // Profile
 export const fetchProfile = () => API.get('/profile');
 export const updateProfile = (data) => API.put('/profile', data);

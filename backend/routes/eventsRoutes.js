@@ -19,8 +19,8 @@ router.get('/:id', getEventById);
 router.post('/:id/book', authMiddleware, bookEvent);
 
 // Optional admin
-router.post('/', authMiddleware, adminOnly, createEvent);
-router.put('/:id', authMiddleware, adminOnly, updateEvent);
-router.delete('/:id',authMiddleware, adminOnly, deleteEvent);
+router.post('/', authMiddleware, createEvent);
+router.put('/:id', authMiddleware, updateEvent);
+router.delete('/:id', authMiddleware, deleteEvent);
 
 export default router;

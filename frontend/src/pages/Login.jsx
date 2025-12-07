@@ -23,9 +23,9 @@ const Login = () => {
       login(res.data.user, res.data.token);
 
       // Navigation based on role
- 
-        navigate("/dashboard");
-      
+
+      navigate("/dashboard");
+
 
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
@@ -35,60 +35,110 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-lg border border-gray-200 p-8">
-
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-black">Welcome Back</h1>
-          <p className="text-gray-600 mt-2">Login to your account</p>
+    <div className="min-h-screen bg-white flex">
+      {/* Left Side - Image/Branding (Optional, or just white/black pattern) */}
+      <div className="hidden lg:flex lg:w-1/2 bg-black text-white items-center justify-center p-12">
+        <div className="max-w-md">
+          <h1 className="text-5xl font-extrabold mb-6 tracking-tight">EventSphere.</h1>
+          <p className="text-xl text-gray-300 leading-relaxed">
+            Experience the most professional event management platform.
+            Seamless, elegant, and efficient.
+          </p>
         </div>
+      </div>
 
-        {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-sm font-semibold text-black mb-2">Email</label>
-            <input
-              type="email"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              required
-              className="input-field"
-              placeholder="your@email.com"
-            />
+      {/* Right Side - Login Form */}
+      <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-20 xl:px-24 bg-white">
+        <div className="mx-auto w-full max-w-sm lg:w-96">
+          <div className="mb-10">
+            <h2 className="mt-6 text-3xl font-extrabold text-gray-900 tracking-tight">
+              Welcome back
+            </h2>
+            <p className="mt-2 text-sm text-gray-600">
+              Please sign in to your account
+            </p>
           </div>
 
-          <div>
-            <label className="block text-sm font-semibold text-black mb-2">Password</label>
-            <input
-              type="password"
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              required
-              className="input-field"
-              placeholder="••••••••"
-            />
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            {error && (
+              <div className="bg-red-50 border-l-4 border-red-500 p-4">
+                <div className="flex">
+                  <div className="ml-3">
+                    <p className="text-sm text-red-700">{error}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-bold text-gray-900 uppercase tracking-wide">
+                Email
+              </label>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="input-field"
+                  placeholder="name@company.com"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-bold text-gray-900 uppercase tracking-wide">
+                Password
+              </label>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  value={form.password}
+                  onChange={(e) => setForm({ ...form, password: e.target.value })}
+                  className="input-field"
+                  placeholder="••••••••"
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn-primary"
+              >
+                {loading ? "AUTHENTICATING..." : "SIGN IN"}
+              </button>
+            </div>
+          </form>
+
+          <div className="mt-8">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="bg-white px-2 text-gray-500 uppercase tracking-wider font-medium">Or</span>
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <Link
+                to="/signup"
+                className="btn-secondary"
+              >
+                Create Account
+              </Link>
+            </div>
           </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="btn-primary w-full"
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
-
-        <p className="mt-6 text-center text-sm text-gray-600">
-          New user?{" "}
-          <Link to="/" className="text-black font-semibold hover:text-gray-700 transition-colors">
-            Sign up
-          </Link>
-        </p>
+        </div>
       </div>
     </div>
   );
