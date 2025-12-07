@@ -21,6 +21,7 @@ export const signup = async (req, res) => {
     res.json({
       message: "Signup successful",
       user,
+      token: generateToken(user),
     });
   } catch (err) {
     console.error(err);

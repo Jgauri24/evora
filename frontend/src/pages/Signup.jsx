@@ -23,7 +23,7 @@ const Signup = () => {
       const res = await signupAPI(form);
       localStorage.setItem("token", res.data.token);
 
-      navigate("/login");
+      navigate("/dashboard");
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");
     }

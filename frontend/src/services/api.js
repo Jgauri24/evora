@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:4000/api",
+  baseURL: import.meta.env.VITE_API_URL || "https://evora-vx66.onrender.com/api",
 });
 
 // Attach token automatically for ALL requests
